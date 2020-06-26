@@ -1,0 +1,153 @@
+%%----------------------------------------------------------------------
+%%
+\usepackage{bm}
+%\def\V#1{\mbox{\boldmath $#1$}}
+%\def\M#1{\mbox{\boldmath $#1$}}
+%\def\S#1{\mbox{\boldmath $#1$}}
+%\def\Ts#1{\mbox{\boldmath $#1$}}
+\def\V#1{{\bm{#1}}}
+\def\M#1{{\bm{#1} }}
+\def\S#1{{\bm{#1}}}
+\def\Ts#1{{\bm{#1}}}
+
+\def\MtxK#1#2{\left[ \begin{array}[c]{#1} #2 \end{array} \right]}
+\def\Vec#1{\MtxK{c}{#1}}
+\def\Mtx2#1{\MtxK{cc}{#1}}
+\def\Mtx1#1{\MtxK{c}{#1}}
+\def\Tsr#1{\MtxK{c}{#1}}
+
+\def\DpO{\times} %% 直積記号 : direct product
+\def\DpA#1{\bar{#1}}  %% 直積の値の頭につけるアクセント
+
+\def\MxA#1{\hat{#1}}  %%  混合分布につけるアクセント
+
+\def\Est#1{\hat{#1}}    %% estimate
+\def\Apx#1{\tilde{#1}}  %% approx
+\def\Opt#1{\check{#1}}  %% optimum
+
+\def\Av#1{\left|#1\right|}
+\def\SD#1{\sigma_{#1}}
+\def\Var#1{\SD{#1}^2}
+
+\def\Seq#1{\left\{ #1 \right\}}
+\def\Set#1{\left\{ #1 \right\}}
+\def\Tuple#1{\left< #1 \right>}
+
+\makeatletter
+  \def\@LkS{{\cal L}}    %% likelihood Symbol
+  \def\@LkF[#1]{\@LkS\left(#1\right)}    %% likelihood func.
+  \def\Lk{\@ifnextchar[{\@LkF}{\@LkS}% ]
+         }
+\makeatother
+
+\def\Pr{{\cal P}}
+\def\G{{\cal G}}
+\def\nz{\epsilon}	%% noise
+
+%%======================================================================
+\def\NofI{i}  %% 罹患者数
+\def\NofD{v}  %% 発症者数
+\def\CumD{w}  %% 累計発症者数
+
+\def\LpNofI{I}  %% 罹患者数(ラプラス変換後)
+\def\LpNofD{V}  %% 発症者数(ラプラス変換後)
+\def\LpCumD{W}  %% 累計発症者数(ラプラス変換後)
+
+\def\PrR{\gamma} %% 治癒確率
+\def\PrD{\lambda} %% 発症確率
+
+\def\Ddt#1{\dot{#1}} %% 時間微分
+
+\makeatletter
+\def\Lp{\@ifnextchar[{\@Lp}{{\cal L}}} %% ラプラス変換 \Lp[f] or \Lp(f)
+\def\@Lp[#1]{\Lp{}\left[#1\right]}
+\def\ILp{\@ifnextchar[{\@ILp}{{\cal L}^{-1}}} %% ラプラス変換 \Lp[f] or \Lp(f)
+\def\@ILp[#1]{\ILp{}\left[#1\right]}
+\makeatother
+
+\def\Conv{\ast}  %% 畳み込み積分 (Convolution Integral)
+
+
+%%======================================================================
+
+\def\Where{\mbox{\hspace{3em}} ; \mbox{\hspace{1em}}}
+\def\where0pt{\makebox[0pt][l]{\mbox{where}} \nonumber}
+
+
+\def\MyBox#1{{\unitlength=#1 \framebox(1,1){}}}
+\def\MyFillBox#1{\rule{#1}{#1}}
+\def\EOTH{\hfill\MyBox{.5em}}
+\def\QED{\hfill\MyFillBox{.5em}}
+
+\newenvironment{Note}[1]{%
+%  \paragraph*{ノート: #1} \fill \rule{0.5\textwidth}{1pt}
+  \paragraph{\protect\MyFillBox{1em} ノート--- #1} \hrule%
+  \hfill 
+}{%
+  \hfill\MyBox{1em}\hrule
+  \ \\
+}
+
+%%======================================================================
+
+\newif\ifWideBoxedEqnarray
+\WideBoxedEqnarraytrue
+\WideBoxedEqnarrayfalse
+
+\newenvironment{BoxedEqnarray}{%
+  \vspace{-4ex}
+  \begin{center}%
+    \begin{tabular}[c]{|c|} \hline%
+      \begin{minipage}[c]{\textwidth}  %{width}
+      \ifWideBoxedEqnarray%
+        \vspace{-0.5ex} %
+      \else%
+        \vspace{-2.3ex} %
+      \fi%
+        \begin{eqnarray}%
+}{%
+        \end{eqnarray}%
+      \end{minipage}%
+      \ifWideBoxedEqnarray%
+        \\%
+      \else%
+        % nothing
+      \fi%
+%      \\
+      \\ \hline%
+    \end{tabular}
+  \end{center}%
+}
+
+%%======================================================================
+
+\def\DefPrefix{定義}
+\def\LemmaPrefix{補題}
+\def\TheoremPrefix{定理}
+\newtheorem{genericTheorems}{GenericTheorem}[section]
+\newtheorem{xDef}[genericTheorems]{\DefPrefix}
+\newtheorem{xLemma}[genericTheorems]{\LemmaPrefix}
+\newtheorem{xTheorem}[genericTheorems]{\TheoremPrefix}
+
+\newenvironment{Lemma}{%
+  \begin{xLemma}%
+    \addcontentsline{toc}{subparagraph}{%
+      \fbox{\LemmaPrefix \thexLemma}}
+  \ \\
+}{%
+  \EOTH%
+  \end{xLemma}%
+}
+
+\newenvironment{Theorem}{%
+  \begin{xTheorem}%
+    \addcontentsline{toc}{subparagraph}{%
+      \fbox{\TheoremPrefix \thexLemma}}
+  \ \\
+}{%
+  \EOTH
+  \end{xTheorem}%
+}
+
+
+
