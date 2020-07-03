@@ -1,5 +1,6 @@
 %%----------------------------------------------------------------------
 %%
+\usepackage{amssymb}
 \usepackage{bm}
 %\def\V#1{\mbox{\boldmath $#1$}}
 %\def\M#1{\mbox{\boldmath $#1$}}
@@ -21,9 +22,11 @@
 
 \def\MxA#1{\hat{#1}}  %%  混合分布につけるアクセント
 
+\usepackage{accents}
 \def\Est#1{\hat{#1}}    %% estimate
 \def\Apx#1{\tilde{#1}}  %% approx
-\def\Opt#1{\check{#1}}  %% optimum
+%\def\Opt#1{\check{#1}}  %% optimum
+\def\Opt#1{\accentset{*}{#1}}  %% optimum
 
 \def\Av#1{\left|#1\right|}
 \def\SD#1{\sigma_{#1}}
